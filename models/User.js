@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   age: { type: Number, required: true },
   gender: { type: String, required: true },
-  rollNo: { type: String, required: true, unique: true }, // required + unique
+  email: { type: String, required: true, unique: true }, // required + unique
   image: { type: String },
 });
 

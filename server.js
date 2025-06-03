@@ -50,7 +50,10 @@ const __dirname = path.dirname(__filename);
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5174', // match your frontend port
+  credentials: true,
+}));
 app.use(express.urlencoded({ extended: true }));
 
 // Static folder to serve uploaded images

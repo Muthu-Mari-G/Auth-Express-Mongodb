@@ -183,16 +183,16 @@ router.get("/api/getUsers/:id", async (req, res) => {
 // REGISTER student
 router.post("/api/getUsers", upload.single("image"), async (req, res) => {
   try {
-    const { username, password, age, gender, rollNo } = req.body;
+    const { username, password, age, gender, email } = req.body;
 
     // Validate required fields
-    if (!username || !password || !age || !gender || !rollNo) {
+    if (!username || !password || !age || !gender || !email) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    // Check for duplicates by rollNo or studentName
+    // Check for duplicates by email or studentName
     const existing = await User.findOne({
-      $or: [{ rollNo }, { username }],
+      $or: [{ email }, { username }],
     });
     if (existing) {
       return res.status(400).json({
@@ -209,7 +209,7 @@ router.post("/api/getUsers", upload.single("image"), async (req, res) => {
       password: hashedPassword,
       age: Number(age),
       gender,
-      rollNo,
+      email,
       image: req.file ? req.file.filename : "",
     });
 
